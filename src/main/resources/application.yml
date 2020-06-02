@@ -1,0 +1,47 @@
+server:
+  port: 8090
+
+wxconfig:
+  appId: "XX"
+  appSecret: "XX"
+  grantType: "authorization_code"
+  loginUrl: "https://api.weixin.qq.com/sns/jscode2session"
+
+juhe:
+  newsAppKey: "XX"
+  newsUrl: "http://v.juhe.cn/toutiao/index"
+
+spring:
+  profiles:
+    active: root
+  jpa:
+    hibernate:
+      ddl-auto: update # 如果数据库里有这个表，就更新表
+    #      ddl-auto: create  # 如果数据库有这个表，就drop再创建
+    show-sql: true
+---
+#本地数据库配置
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/wxpro?serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    username: XX
+---
+#本地连接服务器数据库配置
+#zx用户的权限：select,insert,update,delete,create,alter
+spring:
+  profiles: server
+  datasource:
+    url: jdbc:mysql://XX:3306/mypro?serverTimezone=UTC
+    username: XX
+    password: XX
+---
+#服务器数据库的本地配置
+spring:
+  profiles: root
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/mypro?serverTimezone=UTC
+    username: XX
+    password: XX
+---
